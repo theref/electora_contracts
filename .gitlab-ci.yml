@@ -1,5 +1,6 @@
 stages:
   - build
+  - test
 
 build-brownie-docker:
   stage: build
@@ -7,12 +8,19 @@ build-brownie-docker:
   services:
     - docker:dind
   variables:
-    IMAGE_TAG: $CI_REGISTRY_IMAGE/brownie
+    IMAGE_TAG: $CI_REGISTRY_IMAGE/electora-docker
     DOCKER_TLS_CERTDIR: "/certs"
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build -t $IMAGE_TAG .
     - docker push $IMAGE_TAG
   only:
-    - main
     - docker-build
+
+test-contracts:
+  stage: test
+  image: $CI_REGISTRY_IMAGE/electora-docker
+  script:
+    - docker run electora-docker
+  only:
+    - main

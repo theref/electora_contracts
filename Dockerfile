@@ -24,10 +24,12 @@ RUN npm install -g ganache
 RUN python3 -m venv /venv
 RUN /venv/bin/pip install --upgrade pip
 
-# # wheel doesn't appear to be installed by default in the arm/v7 python image
-RUN python3 -m pip install --user pipx --no-warn-script-location
+ENV PATH="/root/.local/bin/:${PATH}"
+RUN python3 -m pip install --user pipx
 RUN python3 -m pipx ensurepath
-RUN ~/.local/bin/pipx install eth-brownie
+RUN pipx install eth-brownie
 
-COPY requirements.txt ./
+COPY . ./
 RUN /venv/bin/pip install -r requirements.txt
+
+CMD brownie test
