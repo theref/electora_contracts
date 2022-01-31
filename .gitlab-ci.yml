@@ -21,6 +21,6 @@ test-contracts:
   stage: test
   image: $CI_REGISTRY_IMAGE/electora-docker
   script:
-    - docker run electora-docker
+    - brownie test
   only:
     - main

@@ -26,7 +26,6 @@ RUN /venv/bin/pip install --upgrade pip
 
 ENV PATH="/root/.local/bin/:${PATH}"
 RUN python3 -m pip install --user pipx
-RUN python3 -m pipx ensurepath
 RUN pipx install eth-brownie
 
 COPY . ./
