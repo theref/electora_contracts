@@ -4,7 +4,8 @@ stages:
 build-brownie-docker:
   stage: build
   image: docker:latest
-  services: docker:dind
+  services:
+    - docker:dind
   variables:
     IMAGE_TAG: $CI_REGISTRY_IMAGE/brownie
     DOCKER_TLS_CERTDIR: "/certs"
