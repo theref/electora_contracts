@@ -1,36 +1,17 @@
 stages:
   - build
 
-build-database:
+build-brownie-docker:
   stage: build
-  image: docker/compose
-  services: &dind
-    - name: docker:dind
-      command: ["--experimental"]
+  image: docker:latest
+  services: docker:dind
   variables:
-    BUILDX_VERSION: v0.5.1
     IMAGE_TAG: $CI_REGISTRY_IMAGE/brownie
-  before_script: &install_buildx
-    - apk add curl
-    - mkdir -p ~/.docker/cli-plugins
-    - >-
-        curl -sSLo ~/.docker/cli-plugins/docker-buildx
-        https://github.com/docker/buildx/releases/download/$BUILDX_VERSION/buildx-$BUILDX_VERSION.linux-amd64
-        && chmod a+x ~/.docker/cli-plugins/docker-buildx
-    - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+    DOCKER_TLS_CERTDIR: "/certs"
   script:
-    - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
-    - docker buildx create --use --name mybuilder
-    - >-
-        docker buildx build
-        --file brownie.dockerfile
-        --target brownie
-        --pull
-        --push
-        --platform $PLATFORM
-        --cache-from $IMAGE_TAG
-        --tag $IMAGE_TAG
-        .
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
   only:
     - main
     - docker-build
