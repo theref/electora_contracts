@@ -21,3 +21,7 @@ Will be done using Anvil.
 Needs a db for storing Admins, Candidates, Voters, key-pairs.
 Backend will handle creating and deploying the smart contract for the Election.
 Front end will handle voting.
+
+## Dev Setup
+`pipx install eth-brownie pre-commit black isort`
+`pre-commit install`
