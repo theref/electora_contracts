@@ -18,14 +18,14 @@ RUN apt-get update && apt-get -y install \
 
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - &&  apt-get install -yq nodejs build-essential
 RUN npm install -g npm
-RUN npm install -g ganache-cli@6.12.1
+RUN npm install -g ganache
 
 
 RUN python3 -m venv /venv
 RUN /venv/bin/pip install --upgrade pip
 
 # # wheel doesn't appear to be installed by default in the arm/v7 python image
-RUN python3 -m pip install --user pipx
+RUN python3 -m pip install --user pipx --no-warn-script-location
 RUN python3 -m pipx ensurepath
 RUN ~/.local/bin/pipx install eth-brownie
 
