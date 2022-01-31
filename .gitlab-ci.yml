@@ -32,5 +32,5 @@ build-database:
         --tag $IMAGE_TAG
         .
   only:
-    - master
+    - main
     - docker-build
