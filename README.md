@@ -23,5 +23,14 @@ Backend will handle creating and deploying the smart contract for the Election.
 Front end will handle voting.
 
 ## Dev Setup
-`pipx install eth-brownie pre-commit black isort`
+Install `docker` https://docs.docker.com/get-docker/
+Install `pipx` via https://pypa.github.io/pipx/installation/
+`pipx install pre-commit black isort`
+
+Clone this repo: `git clone git@gitlab.com:theref/electora.git`
+`cd electora`
 `pre-commit install`
+
+To run the tests
+`docker build -t electora-brownie .`
+`docker run electora-brownie`
