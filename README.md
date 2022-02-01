@@ -24,13 +24,21 @@ Front end will handle voting.
 
 ## Dev Setup
 Install `docker` https://docs.docker.com/get-docker/
-Install `pipx` via https://pypa.github.io/pipx/installation/
-`pipx install pre-commit black isort`
 
-Clone this repo: `git clone git@gitlab.com:theref/electora.git`
-`cd electora`
-`pre-commit install`
+Install `pipx` via https://pypa.github.io/pipx/installation/
+```
+pipx install pre-commit black isort
+```
+
+Clone this repo:
+```
+git clone git@gitlab.com:theref/electora.git
+cd electora
+pre-commit install
+```
 
 To run the tests
-`docker build -t electora-brownie .`
-`docker run electora-brownie`
+```
+docker build -t electora-brownie .
+docker run electora-brownie
+```
