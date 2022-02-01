@@ -28,7 +28,5 @@ ENV PATH="/root/.local/bin/:${PATH}"
 RUN python3 -m pip install --user pipx
 RUN pipx install eth-brownie
 
-COPY . ./
+COPY requirements.txt ./
 RUN /venv/bin/pip install -r requirements.txt
-
-CMD brownie test
