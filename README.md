@@ -42,3 +42,7 @@ To run the tests
 docker build -t electora-brownie .
 docker run --rm -v $PWD:/usr/src electora-brownie brownie test
 ```
+
+## Suggested Reading
+If you fancy contributing, here is a list of recomended resources
+- https://www.youtube.com/watch?v=M576WGiDBdQ First 7 lessons is enough
