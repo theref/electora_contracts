@@ -21,6 +21,7 @@ test-contracts:
   stage: test
   image: docker:latest
   script:
+    - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
     - docker pull $CI_REGISTRY_IMAGE/electora-docker
     - docker build -t electora-brownie .
     - docker run --rm -v $PWD:/usr/src electora-brownie brownie test
