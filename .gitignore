@@ -137,3 +137,6 @@ node.pid
 *backup.tar
 
 config.toml
+
+# brownie
+reports/
