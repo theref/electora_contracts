@@ -20,9 +20,14 @@ build-brownie-docker:
 test-contracts:
   stage: test
   image: docker:latest
+  services:
+    - docker:dind
+  variables:
+    IMAGE_TAG: $CI_REGISTRY_IMAGE/electora-docker
+    DOCKER_TLS_CERTDIR: "/certs"
   script:
     - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
-    - docker pull $CI_REGISTRY_IMAGE/electora-docker
+    - docker pull $IMAGE_TAG
     - docker build -t electora-brownie .
     - docker run --rm -v $PWD:/usr/src electora-brownie brownie test
   only:
