@@ -11,7 +11,7 @@ contract SimpleVote is Ownable {
         fundingAmount = _fundingAmount;
     }
 
-    function whitelistAddress(address payable user) public onlyOwner {
+    function whitelistAddress(address payable user) public payable onlyOwner {
         registeredVoters[user] = true;
         user.transfer(fundingAmount);
     }
