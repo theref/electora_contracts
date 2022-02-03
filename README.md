@@ -45,4 +45,6 @@ docker run --rm -v $PWD:/usr/src electora-brownie brownie test
 
 ## Suggested Reading
 If you fancy contributing, here is a list of recomended resources
-- https://www.youtube.com/watch?v=M576WGiDBdQ First 7 lessons is enough
+- Python and Solidity https://www.youtube.com/watch?v=M576WGiDBdQ First 7 lessons is enough
+- Known attack vectors and common anti-patterns https://blog.sigmaprime.io/solidity-security.html
+- A compilation of patterns and best practices for the smart contract programming language Solidity https://fravoll.github.io/solidity-patterns/
