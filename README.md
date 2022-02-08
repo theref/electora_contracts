@@ -39,7 +39,7 @@ pre-commit install
 
 To run the tests
 ```
-docker build -t electora-brownie .
+docker build -t electora-brownie  -f base.dockerfile .
 docker run --rm -v $PWD:/usr/src electora-brownie brownie test
 ```
 
