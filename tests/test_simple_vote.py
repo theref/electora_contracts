@@ -1,5 +1,6 @@
 import brownie
-from brownie import SimpleVote, accounts
+import pytest
+from brownie import SimpleVote, accounts, exceptions
 from web3 import Web3
 
 
@@ -17,7 +18,7 @@ def test_add_to_whitelist_with_wrong_acccount():
     owner = accounts[0]
     voter = accounts.add()
     simple_vote = SimpleVote.deploy(0, {"from": owner})
-    with brownie.reverts():
+    with pytest.raises(exceptions.VirtualMachineError):
         simple_vote.whitelistAddress(voter, {"from": accounts[1]})
 
 
@@ -26,7 +27,7 @@ def test_create_candidate_array():
     simple_vote = SimpleVote.deploy(2, {"from": owner})
     assert simple_vote.votes(0) == 0
     assert simple_vote.votes(1) == 0
-    with brownie.reverts():
+    with pytest.raises(exceptions.VirtualMachineError):
         simple_vote.votes(2)
 
 
@@ -49,6 +50,6 @@ def test_cannot_vote_twice():
     tx.wait(1)
     tx = simple_vote.vote(0, {"from": voter})
     tx.wait(1)
-    with brownie.reverts():
+    with pytest.raises(exceptions.VirtualMachineError):
         tx = simple_vote.vote(0, {"from": voter})
         tx.wait(1)
