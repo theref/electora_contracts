@@ -1,5 +1,21 @@
 stages:
+  - build
   - test
+
+build-brownie-docker:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  variables:
+    IMAGE_TAG: electora-docker
+    DOCKER_TLS_CERTDIR: "/certs"
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -f base.dockerfile -t $CI_REGISTRY_IMAGE/$IMAGE_TAG .
+    - docker push $CI_REGISTRY_IMAGE/$IMAGE_TAG
+  only:
+    - docker-build
 
 test-contracts:
   stage: test
@@ -10,7 +26,8 @@ test-contracts:
     IMAGE_TAG: electora-docker
     DOCKER_TLS_CERTDIR: "/certs"
   script:
-    - docker build -f base.dockerfile -t ape-vy-docker .
-    - docker run --rm -v $PWD:/usr/src ape-vy-docker ape test -v
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker pull $CI_REGISTRY_IMAGE/$IMAGE_TAG
+    - docker run --rm -v $PWD:/usr/src $CI_REGISTRY_IMAGE/$IMAGE_TAG brownie test -v
   only:
     - main
