@@ -1,5 +1,1 @@
-eth-ape
-ape-infura
-ape-vyper
-ape-solidity
-vyper
+pycryptodome
