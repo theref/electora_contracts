@@ -10,9 +10,9 @@ When a Voter votes, they are signing a tx that interacts with the smart contract
 At the Election closing point, results are published.
 
 ### Smart Contract
-Will be written in Solidity and initially published to a test network.
+Will be written in Vyper and initially published to a test network.
 Rinkeby and Kovan are ETH test networks.
-Brownie will be used for Solidity development.
+Ape will be used for Solidity development.
 
 The smart contract needs to be configurable because number of voters and candidates will always change.
 
@@ -25,22 +25,21 @@ Front end will handle voting.
 ## Dev Setup
 Install `docker` https://docs.docker.com/get-docker/
 
-Install `pipx` via https://pypa.github.io/pipx/installation/
+Install `pipx` via https://pypa.github.io/pipx/installation/ then:
 ```
 pipx install pre-commit black isort
 ```
 
-Clone this repo:
+Clone this repo, then:
 ```
-git clone git@gitlab.com:theref/electora.git
-cd electora
+cd electora_contracts
 pre-commit install
 ```
 
 To run the tests
 ```
-docker build -t electora-brownie  -f base.dockerfile .
-docker run --rm -v $PWD:/usr/src electora-brownie brownie test
+docker build -t electora-ape  -f base.dockerfile .
+docker run --rm -v $PWD:/usr/src electora-ape ape test
 ```
 
 ## Suggested Reading

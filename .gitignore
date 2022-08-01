@@ -142,3 +142,4 @@ config.toml
 reports/
 
 .build/
+.gitsigners
